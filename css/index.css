@@ -1,0 +1,238 @@
+/* =========================================================
+   BASE DO SITE (cores, tipografia e resets simples)
+   - Comentários explicam o papel de cada bloco.
+   - Versão sem bordas arredondadas.
+========================================================= */
+
+:root{
+  /* Paleta aproximada do layout das imagens (navy + dourado) */
+  --azul-900:#17232b;
+  --azul-800:#1d2e3a;
+  --azul-700:#213645;
+  --azul-600:#2b4658;
+  --azul-100:#eef5fb;
+
+  --texto:#20303b;
+  --branco:#ffffff;
+  --dourado:#e7d9a8;       /* títulos/realces */
+  --dourado-escuro:#cabd8a;
+
+  --shadow: 0 10px 30px rgba(0,0,0,.15);
+  --radius: 0;             /* sem bordas arredondadas */
+  --container: 1180px;     /* largura máx. centralizada */
+}
+
+*{ box-sizing: border-box; }
+html,body{ height:100%; scroll-behavior:smooth; }
+body{
+  margin:0;
+  color:var(--texto);
+  font: 400 16px/1.6 "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:#fafcfe;
+}
+
+/* Utilitário: esconde label sem perder acessibilidade */
+.sr-only{
+  position:absolute; width:1px; height:1px; margin:-1px; border:0; padding:0;
+  white-space:nowrap; clip-path:inset(50%); clip:rect(0 0 0 0); overflow:hidden;
+}
+
+/* Contêiner centralizador com largura máxima */
+.container{ width: min(var(--container), 90%); margin-inline:auto; }
+
+/* ---------------------------------------------------------
+   HEADER FIXO
+--------------------------------------------------------- */
+.site-header{
+  position:fixed; inset-block-start:0; inset-inline:0;
+  z-index:1000;
+  transition: background .25s ease, box-shadow .25s ease;
+  background:transparent;
+}
+.site-header.scrolled{
+  background:rgba(23,35,43,.9);   /* ganha cor ao rolar */
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
+}
+.header-wrap{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 0;
+}
+.logo{ display:inline-flex; align-items:center; text-decoration:none; }
+.logo svg text{ paint-order: stroke; stroke:#1b2530; stroke-width:.8; }
+
+/* Navegação */
+.nav ul{ list-style:none; display:flex; gap:28px; margin:0; padding:0; }
+.nav a{
+  text-decoration:none; color:#d9e6f2; font-weight:500; letter-spacing:.2px;
+}
+.nav a:hover, .nav a:focus{ color:var(--dourado); }
+
+.menu-toggle{
+  display:none; background:transparent; border:0; color:#d9e6f2; cursor:pointer;
+}
+
+/* ---------------------------------------------------------
+   HERO (banner de topo)
+--------------------------------------------------------- */
+.hero{ position:relative; min-height:86vh; display:grid; align-items:end; }
+.hero-bg{
+  /* Imagem de fundo: troque por /img/hero.jpg */
+  position:absolute; inset:0; background:
+    center / cover no-repeat url("../img/reunião02.jpg");
+  z-index:-2;
+}
+.hero-overlay{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(23,35,43,.55) 0%, rgba(23,35,43,.65) 45%, rgba(23,35,43,.85) 100%);
+  z-index:-1;
+}
+.hero-content{
+  padding:120px 0 40px;
+  text-align:center;
+  color:#eaf2fb;
+}
+.hero-title{
+  margin:0 0 14px;
+  font-family:"Playfair Display", serif;
+  font-weight:700;
+  font-size: clamp(28px, 5vw, 46px);
+}
+.hero-sub{
+  max-width:900px; margin:0 auto 22px; opacity:.95;
+}
+.btn{
+  display:inline-block; padding:12px 22px; border-radius:0;   /* sem borda arredondada */
+  background:#2f89c5; color:#fff; text-decoration:none; font-weight:600;
+  box-shadow:0 12px 24px rgba(0,0,0,.18);
+}
+.btn:hover{ filter:brightness(1.05); transform:translateY(-1px); }
+.btn-secondary{
+  background:#20313c; color:#eaf2fb;
+}
+
+/* Faixa dos 3 pilares (grudada no banner) */
+.pilares{
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:22px; width:min(1100px, 92%); margin:40px auto -52px;
+}
+.pilar{
+  position:relative; background:#233746; color:#dfe9f2;
+  border-radius:0; padding:32px 20px; text-align:center;   /* sem borda arredondada */
+  box-shadow:var(--shadow);
+}
+.pilar-bg{
+  position:absolute; inset:auto 0 10px 0; margin:auto;
+  font-family:"Playfair Display",serif; font-size:180px; line-height:1;
+  color:transparent; -webkit-text-stroke: 1px rgba(231,217,168,.25);
+  opacity:.35; pointer-events:none;
+}
+.pilar-text{
+  position:relative; z-index:2;
+  font-weight:600; letter-spacing:1.5px;
+}
+
+/* ---------------------------------------------------------
+   INTRO / QUEM SOMOS
+--------------------------------------------------------- */
+.intro{ padding:110px 0 30px; }
+.intro-card{
+  display:grid; grid-template-columns: 1.3fr 1fr; gap:36px;
+  background:#f6fbff; border-radius:0; box-shadow:var(--shadow);  /* sem borda arredondada */
+  overflow:hidden; margin-bottom:40px;
+}
+.intro-media img{ width:100%; height:100%; object-fit:cover; display:block; }
+.intro-text{ padding:32px; display:grid; align-content:center; gap:16px; }
+.brand{
+  margin:0; font-family:"Playfair Display",serif; font-size: clamp(28px, 5vw, 48px);
+  color:#233746; letter-spacing:3px;
+}
+.lead{ margin:0 0 8px; color:#344b5b; }
+
+.section-head{ text-align:center; margin:28px 0 8px; }
+.section-head h3{
+  font:700 clamp(24px, 3.8vw, 38px) "Playfair Display",serif;
+  margin:0 0 6px; color:#233746;
+}
+.section-head p{ margin:0; color:#5a7284; }
+
+/* Cards de benefícios/serviços */
+.cards{
+  margin-top:26px;
+  display:grid; gap:22px;
+  grid-template-columns: repeat(4, 1fr);
+}
+.card{
+  background:#233746; color:#e9f2fa; border-radius:0; padding:28px 20px; /* sem borda arredondada */
+  display:grid; justify-items:center; text-align:center; gap:14px;
+  box-shadow:var(--shadow);
+}
+.card .icon{ color:var(--dourado-escuro); }
+.card h4{ margin:0; font-size:18px; font-weight:600; }
+
+/* ---------------------------------------------------------
+   CONTATO
+--------------------------------------------------------- */
+.contato{
+  background:linear-gradient(180deg, var(--azul-800), var(--azul-900));
+  color:#dfe9f2;
+  padding:70px 0;
+}
+.contato-wrap{
+  display:grid; grid-template-columns: 1fr 1.1fr; gap:38px;
+  background:rgba(0,0,0,.14); border-radius:0; padding:34px; /* sem borda arredondada */
+}
+.contato-info{ display:grid; gap:20px; align-content:start; }
+.info-item{ display:flex; align-items:center; gap:12px; font-size:18px; }
+.info-item svg{ color:#dfe9f2; }
+
+.contato-form{ display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
+.form-row{ display:grid; gap:8px; }
+.form-row--full{ grid-column: 1 / -1; }
+input, textarea{
+  width:100%; border:1px solid #375165; background:#132029; color:#eaf2fb;
+  padding:14px 14px; border-radius:0; outline:0; /* sem borda arredondada */
+}
+input::placeholder, textarea::placeholder{ color:#a9bfce; }
+input:focus, textarea:focus{ border-color:#4a86b7; box-shadow:0 0 0 3px rgba(74,134,183,.25); }
+.erro{ color:#ffd2d2; font-size:13px; min-height:16px; }
+
+.btn-send{
+  grid-column: 1 / -1;
+  justify-self:start;
+  background:#2f89c5;
+}
+.form-feedback{ grid-column: 1 / -1; margin:6px 0 0; min-height:20px; }
+
+/* ---------------------------------------------------------
+   RODAPÉ
+--------------------------------------------------------- */
+.footer{ background:#0f171c; color:#a7bdcb; padding:18px 0; text-align:center; }
+
+/* ---------------------------------------------------------
+   RESPONSIVIDADE
+--------------------------------------------------------- */
+@media (max-width: 1024px){
+  .cards{ grid-template-columns: repeat(2, 1fr); }
+  .intro-card{ grid-template-columns: 1fr; }
+}
+@media (max-width: 820px){
+  .pilares{ grid-template-columns:1fr; margin:32px auto -46px; }
+  .contato-wrap{ grid-template-columns:1fr; }
+  .contato-form{ grid-template-columns:1fr; }
+  .btn-send{ justify-self:stretch; text-align:center; }
+}
+@media (max-width: 760px){
+  /* Menu vira hambúrguer */
+  .menu-toggle{ display:inline-flex; }
+  .nav{
+    position:fixed; inset-inline:0; inset-block-start:64px;
+    background:rgba(23,35,43,.98); backdrop-filter: blur(8px);
+    transform: translateY(-120%); transition: transform .25s ease;
+    box-shadow:var(--shadow);
+  }
+  .nav.open{ transform: translateY(0); }
+  .nav ul{ flex-direction:column; gap:0; }
+  .nav li{ border-top:1px solid rgba(255,255,255,.06); }
+  .nav a{ display:block; padding:14px 20px; }
+}
